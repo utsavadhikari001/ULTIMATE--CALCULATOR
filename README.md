@@ -83,6 +83,9 @@ The graphing system supports:
 <img width="425" height="549" alt="Screenshot 2026-09-06 203620" src="https://github.com/user-attachments/assets/cc1eaa95-3dcd-4735-b1ae-3ecac408e63c" />
 <img width="423" height="543" alt="Screenshot 2026-09-06 203455" src="https://github.com/user-attachments/assets/4605f14b-3af6-43f1-a6d0-6ab90cfc9c59" />
 <img width="404" height="325" alt="Screenshot 2026-09-06 203831" src="https://github.com/user-attachments/assets/fceff061-e9e4-4f29-8145-3e65ceefec3e" />
+<img width="438" height="383" alt="Screenshot 2026-09-06 205945" src="https://github.com/user-attachments/assets/95f9c8ea-7ad2-4114-9fe3-0d1f4f0969a9" />
+<img width="422" height="251" alt="Screenshot 2026-09-06 205900" src="https://github.com/user-attachments/assets/f05d4343-e4d7-4a95-b5f4-7ec83799843c" />
+<img width="421" height="261" alt="Screenshot 2026-09-06 205846" src="https://github.com/user-attachments/assets/362301ed-6efe-4253-a7e1-8e2453ba8656" />
 
 ### Example 
  
