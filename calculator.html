@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ultimate Scientific Calculator</title>
+  <link rel="stylesheet" href="calculator.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div id="connectionStatus" class="connection-status disconnected">Backend: Disconnected</div>
+
+  <div class="wrap" id="app" data-theme="dark">
+    <section class="card main-card">
+      <div class="topbar">
+        <h1 class="title">Ultimate Scientific Calculator</h1>
+        <div class="controls">
+          <button id="degToggle" class="btn-icon" type="button" title="Angle mode"><span id="degLabel">DEG</span></button>
+          <button id="themeToggle" class="btn-icon" type="button" title="Theme">Theme</button>
+          <button id="copyBtn" class="btn-icon" type="button" title="Copy">Copy</button>
+          <button id="settingsBtn" class="btn-icon" type="button" title="Settings">Settings</button>
+        </div>
+      </div>
+
+      <div class="display-area">
+        <div class="display-top">
+          <span id="memLed" class="memory-indicator" title="Memory"></span>
+          <span id="miniHistory" class="history-mini"></span>
+        </div>
+        <div id="display" class="main-display">
+          <div id="exprDisplay" class="expr-line"></div>
+          <div id="resultDisplay" class="result-line">0</div>
+        </div>
+      </div>
+
+      <div class="mode-toggle">
+        <button class="active" data-mode="basic" type="button">Basic</button>
+        <button data-mode="scientific" type="button">Scientific</button>
+        <button data-mode="programming" type="button">Programming</button>
+        <button data-mode="graphing" type="button">Graphing</button>
+        <button data-mode="calculus" type="button">Calculus</button>
+      </div>
+
+      <div id="layoutContainer"></div>
+
+      <div class="memory-row">
+        <button class="small-btn" id="mc" type="button">MC</button>
+        <button class="small-btn" id="mr" type="button">MR</button>
+        <button class="small-btn" id="mplus" type="button">M+</button>
+        <button class="small-btn" id="mminus" type="button">M-</button>
+        <button class="small-btn" id="ms" type="button">MS</button>
+        <button class="small-btn" id="toFraction" type="button">a/b</button>
+        <button class="small-btn" id="downloadHistory" type="button">Export</button>
+        <button class="small-btn" id="importData" type="button">Import</button>
+      </div>
+    </section>
+
+    <aside class="side">
+      <section class="card">
+        <h2>Programmer &amp; Units</h2>
+        <div class="tabs" id="sideTabs">
+          <button class="tab active" data-tab="programmer" type="button">Programmer</button>
+          <button class="tab" data-tab="constants" type="button">Constants</button>
+          <button class="tab" data-tab="units" type="button">Units</button>
+        </div>
+
+        <div id="programmerTab" class="tab-panel">
+          <div class="chip-row">
+            <button class="small-btn" data-bit="AND" type="button">AND</button>
+            <button class="small-btn" data-bit="OR" type="button">OR</button>
+            <button class="small-btn" data-bit="XOR" type="button">XOR</button>
+            <button class="small-btn" data-bit="NOT" type="button">NOT</button>
+          </div>
+          <div class="conv-grid">
+            <div>BIN <strong id="binVal">0</strong></div>
+            <div>HEX <strong id="hexVal">0</strong></div>
+            <div>OCT <strong id="octVal">0</strong></div>
+            <div>DEC <strong id="decVal">0</strong></div>
+          </div>
+          <button id="wordSizeLabel" class="word-size" type="button">Word size: 32-bit</button>
+        </div>
+
+        <div id="constantsTab" class="tab-panel" hidden>
+          <div id="constantsList" class="chip-row"></div>
+        </div>
+
+        <div id="unitsTab" class="tab-panel" hidden>
+          <select id="unitCategory">
+            <option value="length">Length</option>
+            <option value="mass">Mass</option>
+            <option value="time">Time</option>
+            <option value="temperature">Temperature</option>
+          </select>
+          <div class="unit-grid">
+            <input id="unitFrom" type="number" placeholder="Value">
+            <select id="unitFromType"></select>
+            <input id="unitTo" type="number" placeholder="Result" readonly>
+            <select id="unitToType"></select>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Graphing</h2>
+        <div class="graph-container"><canvas id="graphCanvas"></canvas></div>
+        <div class="row">
+          <input id="graphFunction" type="text" placeholder="x^2">
+          <button id="plotGraph" class="small-btn" type="button">Plot</button>
+        </div>
+        <input id="graphFunction2" type="text" placeholder="optional g(x)">
+        <div class="row">
+          <input id="graphMin" type="number" value="-10">
+          <input id="graphMax" type="number" value="10">
+        </div>
+        <div class="chip-row">
+          <button class="small-btn" data-preset="x^2" type="button">x^2</button>
+          <button class="small-btn" data-preset="sin(x)" type="button">sin</button>
+          <button class="small-btn" data-preset="cos(x)" type="button">cos</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>History</h2>
+        <div id="historyList" class="history-list">No calculations yet</div>
+        <div class="chip-row">
+          <button id="clearHistory" class="small-btn" type="button">Clear</button>
+          <button id="pasteResult" class="small-btn" type="button">Paste last</button>
+          <button id="syncHistory" class="small-btn" type="button">Sync</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Calculus</h2>
+        <input id="calcExpression" type="text" placeholder="expression with x">
+        <div class="row">
+          <input id="calcPoint" type="text" value="0" placeholder="point">
+          <input id="calcLower" type="text" placeholder="lower">
+          <input id="calcUpper" type="text" placeholder="upper">
+        </div>
+        <div class="chip-row">
+          <button id="differentiate" class="small-btn" type="button">d/dx</button>
+          <button id="integrate" class="small-btn" type="button">Integral</button>
+          <button id="solveEq" class="small-btn" type="button">Solve</button>
+          <button id="limitBtn" class="small-btn" type="button">Limit</button>
+          <button id="seriesBtn" class="small-btn" type="button">Series</button>
+        </div>
+        <div id="calcResult" class="calc-result"></div>
+      </section>
+    </aside>
+  </div>
+
+  <div id="settingsModal" class="modal" hidden>
+    <div class="card modal-card">
+      <h2>Settings</h2>
+      <label>Precision <span id="precisionValue">10 digits</span></label>
+      <input id="precisionRange" type="range" min="2" max="12" value="10">
+      <label>Angle mode</label>
+      <select id="angleMode">
+        <option value="deg">Degrees</option>
+        <option value="rad">Radians</option>
+        <option value="grad">Gradians</option>
+      </select>
+      <label>Notation for non-basic modes</label>
+      <select id="notationMode">
+        <option value="auto">Auto</option>
+        <option value="scientific">Scientific</option>
+        <option value="fixed">Fixed</option>
+      </select>
+      <p class="note">Basic mode always shows a normal number.</p>
+      <div class="row">
+        <button id="cancelSettings" class="small-btn" type="button">Cancel</button>
+        <button id="saveSettings" class="small-btn primary" type="button">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="calculator.js" defer></script>
+</body>
+</html>

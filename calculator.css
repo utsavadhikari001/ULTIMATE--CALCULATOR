@@ -1,0 +1,360 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+
+:root {
+  --bg: #0a0a0f;
+  --card: #14141e;
+  --muted: #9aa3b2;
+  --text: #ffffff;
+  --accent: #6366f1;
+  --button: #1e293b;
+  --danger: #ef4444;
+  --success: #10b981;
+  --warn: #f59e0b;
+}
+
+[data-theme="light"] {
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --muted: #64748b;
+  --text: #0f172a;
+  --button: #e2e8f0;
+}
+
+[data-theme="matrix"] {
+  --bg: #001100;
+  --card: #032003;
+  --muted: #19c819;
+  --text: #00ff00;
+  --accent: #00ff00;
+  --button: #003300;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Inter, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  padding: 20px;
+}
+
+.wrap {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 20px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.side {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.side .card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.side .card h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.topbar,
+.controls,
+.row,
+.chip-row,
+.memory-row,
+.tabs,
+.mode-toggle {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.topbar {
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.title {
+  font-size: 1.35rem;
+  color: var(--accent);
+}
+
+.note,
+.history-mini,
+.expr-line {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.btn-icon,
+.small-btn,
+.key,
+.word-size,
+select,
+input {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--button);
+  color: var(--text);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.btn-icon,
+.small-btn,
+.key,
+.word-size,
+.mode-toggle button,
+.tab {
+  cursor: pointer;
+}
+
+.small-btn.primary {
+  background: var(--success);
+  color: #fff;
+}
+
+.display-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.memory-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--success);
+  opacity: 0;
+}
+
+.memory-indicator.active {
+  opacity: 1;
+}
+
+.main-display {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: right;
+  min-height: 88px;
+  font-family: "Courier New", monospace;
+}
+
+.result-line {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.main-display.error .result-line {
+  color: var(--danger);
+  font-size: 1.2rem;
+}
+
+.mode-toggle,
+.tabs {
+  background: rgba(255, 255, 255, 0.04);
+  padding: 6px;
+  border-radius: 12px;
+}
+
+.mode-toggle button,
+.tab {
+  flex: 1;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.mode-toggle button.active,
+.tab.active {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* Tab panels - only one visible at a time */
+.tab-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tab-panel[hidden] {
+  display: none !important;
+}
+
+.grid {
+  display: grid;
+  gap: 10px;
+}
+
+.grid.basic,
+.grid.graphing,
+.grid.calculus {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.grid.scientific,
+.grid.programming {
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.key {
+  height: 64px;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.key.number {
+  background: #475569;
+  color: #fff;
+}
+
+.key.operator {
+  background: var(--warn);
+  color: #fff;
+}
+
+.key.function {
+  background: var(--accent);
+  color: #fff;
+}
+
+.key.clear {
+  background: var(--danger);
+  color: #fff;
+}
+
+.key.equals {
+  background: var(--success);
+  color: #fff;
+}
+
+.key.wide {
+  grid-column: span 2;
+}
+
+.conv-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.conv-grid div {
+  background: rgba(255, 255, 255, 0.04);
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.word-size {
+  width: 100%;
+}
+
+.unit-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.graph-container {
+  height: 200px;
+}
+
+.history-list {
+  max-height: 200px;
+  overflow: auto;
+  display: grid;
+  gap: 8px;
+}
+
+.history-row {
+  display: flex;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.calc-result {
+  min-height: 40px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+select,
+input {
+  width: 100%;
+}
+
+.memory-row {
+  margin-top: 12px;
+}
+
+.connection-status {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: rgba(239, 68, 68, 0.15);
+}
+
+.connection-status.connected {
+  background: rgba(16, 185, 129, 0.15);
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal[hidden] {
+  display: none !important;
+}
+
+.modal-card {
+  width: min(420px, 92vw);
+  display: grid;
+  gap: 10px;
+}
+
+@media (max-width: 1100px) {
+  .wrap {
+    grid-template-columns: 1fr;
+  }
+
+  .grid.basic,
+  .grid.scientific,
+  .grid.programming,
+  .grid.graphing,
+  .grid.calculus {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
